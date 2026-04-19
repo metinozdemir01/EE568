@@ -136,7 +136,7 @@
     </figure>
 
     <h2>3.2 Inductance, Stored Energy, and Torque (Q2-b, Q2-c)</h2>
-    <p>Initially, a parametric sweep was conducted on the 2D linear model to extract baseline data for direct comparison with the analytical derivations in MATLAB. However, to obtain a more realistic and continuous representation of the dynamic torque profile, a time-dependent study was subsequently employed for the remainder of the linear analysis. Through the global evaluation of this time-dependent linear model, the inductance, stored magnetic energy, and axial torque were extracted. At the fully aligned position (0 degrees), the stored magnetic energy was computed as 0.149 J with an inductance of 0.0477 H. To satisfy the evaluation criteria, data was collected for at least ten operational positions from the time-dependent study. Table 1 details these extracted torque values.</p>
+    <p>Through the global evaluation of the 2D linear model, the inductance, stored magnetic energy, and axial torque were extracted. At the fully aligned position (0 degrees), the stored magnetic energy was computed as 0.149 J with an inductance of 0.0477 H. To satisfy the evaluation criteria and accurately capture the system dynamics, data was collected for at least ten operational positions. Table 1 details these extracted torque values.</p>
 
     <table>
         <caption>Table 1: Axial torque values at discrete rotor positions for the linear material model.</caption>
@@ -160,7 +160,7 @@
         </tbody>
     </table>
 
-    <p>To validate the models, the computational results obtained from the COMSOL simulations were plotted against the theoretical analytical derivations. The idealized analytical model assumes a perfect sinusoidal variation and predicts a higher peak torque. The time-dependent FEM results accurately capture the flux leakage and fringing fields during rotation, resulting in a simulated peak torque of 86.64 mN&middot;m at the 135-degree position.</p>
+    <p>To validate the models, the computational results obtained from the COMSOL simulations were plotted against the theoretical analytical derivations. The idealized analytical model assumes a perfect sinusoidal variation and predicts a higher peak torque. The FEM results accurately capture the flux leakage and fringing fields, resulting in a simulated peak torque of 86.64 mN&middot;m at the 135-degree position.</p>
 
     <figure>
         <img src="Analytical vs FEM Comparison timedependent.png" alt="Comparison of analytical and FEM results">
@@ -186,7 +186,7 @@
     </figure>
 
     <h2>4.2 Inductance and Stored Energy (Q3-b)</h2>
-    <p>Following the methodology established in the latter part of the linear analysis, a time-dependent dynamic study was exclusively performed on the non-linear model to accurately capture the system's continuous dynamic response. At the fully aligned position (0 degrees), the stored energy was calculated as 0.135 J with an inductance of 0.0433 H. Compared to the linear model (0.0477 H), this inductance value is measurably lower due to magnetic saturation heavily reducing the permeability of the core material near the pole tips.</p>
+    <p>Unlike the linear analysis, a time-dependent dynamic study was performed on the non-linear model to accurately capture the system's response. At the fully aligned position (0 degrees), the stored energy was calculated as 0.135 J with an inductance of 0.0433 H. Compared to the linear model (0.0477 H), this inductance value is measurably lower due to magnetic saturation heavily reducing the permeability of the core material near the pole tips.</p>
 
     <h2>4.3 Torque Comparison with Analytical Model (Q3-c)</h2>
     <p>The continuous torque profile obtained from the non-linear time-dependent simulation was documented to compare directly with the linear conditions. The generated torque values at ten discrete positions are summarized in Table 2.</p>
@@ -224,7 +224,7 @@
 
     <h2>4.4 Effects of Fringing and Saturation (Q3-d)</h2>
     <p>Comparing the analytical, linear, and non-linear results highlights the compounding impacts of fringing fields and magnetic saturation on torque production. The reluctance torque is fundamentally driven by the rate of change of inductance concerning position. Fringing fields, which occur when flux leaves the high-permeability iron path to bulge through the surrounding air, are most dominant at unaligned positions (e.g., 90 degrees). This phenomenon effectively increases the cross-sectional area of the air gap, raising the minimum inductance limit compared to idealized models.</p>
-    <p>Conversely, saturation occurs predominantly at aligned positions (0 and 180 degrees) where the magnetic flux is highly concentrated. The non-linear soft iron struggles to accommodate the increasing flux density, leading to a sharp drop in relative permeability. This heavily restricts the maximum achievable inductance. Because torque production relies on maximizing the difference between aligned and unaligned inductances, the simultaneous increase of minimum inductance due to fringing and the suppression of maximum inductance due to saturation severely compresses the actual torque output of the physical machine.</p>
+    <p>Conversely, saturation occurs predominantly at aligned positions (0 and 180 degrees) where the magnetic flux is highly concentrated. The non-linear soft iron struggles to accommodate the increasing flux density, leading to a sharp drop in relative permeability. To illustrate this, local flux density measurements reveal that while the idealized linear model permits extreme concentrations up to 2.36 T at the sharp inner corners and 1.06 T at the core center, the physical non-linear model caps these values at 1.4 T and 0.97 T, respectively. This saturation effect heavily restricts the maximum achievable inductance. Because torque production relies on maximizing the difference between aligned and unaligned inductances, the simultaneous increase of minimum inductance due to fringing and the suppression of maximum inductance due to saturation severely compresses the actual torque output of the physical machine.</p>
 
     <h1>5. Control Method (Q4)</h1>
     <p>To achieve continuous rotation, a position-dependent On/Off DC current excitation method is proposed. The torque production principle of a variable reluctance machine dictates that positive torque is generated only when the rotor is moving from an unaligned position towards an aligned position, corresponding to regions where inductance is increasing. The extracted data confirms negative torque between 0 and 90 degrees, and positive torque between 90 and 180 degrees. Therefore, a rotor position sensor can be utilized to supply the 2.5 A DC current solely when the rotor is positioned between 90-180 degrees and 270-360 degrees. By completely cutting off the excitation current during the intervals where the inductance is decreasing, the generation of negative torque is effectively prevented, ensuring a strictly positive average torque and stable continuous rotation.</p>
