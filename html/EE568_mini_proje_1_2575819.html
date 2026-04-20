@@ -136,7 +136,14 @@
     </figure>
 
     <h2>3.2 Inductance, Stored Energy, and Torque (Q2-b, Q2-c)</h2>
-    <p>Through the global evaluation of the 2D linear model, the inductance, stored magnetic energy, and axial torque were extracted. At the fully aligned position (0 degrees), the stored magnetic energy was computed as 0.149 J with an inductance of 0.0477 H. To satisfy the evaluation criteria and accurately capture the system dynamics, data was collected for at least ten operational positions. Table 1 details these extracted torque values.</p>
+    <p>Initially, a parametric sweep was conducted on the 2D linear model to extract baseline data and validate the FEA setup against the analytical derivations in MATLAB. As illustrated in Figure 4, while the parametric sweep results follow the general sinusoidal trend of the analytical model, the idealized analytical model predicts a higher peak torque by ignoring geometric non-idealities. Furthermore, the discrete and static nature of the parametric solver steps lacks the continuous motional effects provided by a moving mesh interface, resulting in a less realistic representation of the dynamic reluctance torque.</p>
+
+    <figure>
+        <img src="Analytical vs FEM Comparison parametric sweep.png" alt="Comparison of analytical and FEM results (parametric sweep)">
+        <figcaption>Figure 4: Comparison of analytical derivations and FEA parametric sweep results for the linear model.</figcaption>
+    </figure>
+
+    <p>To overcome these static limitations and obtain a more precise and continuous dynamic torque profile, the methodology was shifted to a time-dependent transient study for the remainder of the analysis. Through the global evaluation of this time-dependent linear model, the continuous inductance, stored magnetic energy, and axial torque were extracted. At the fully aligned position (0 degrees), the stored magnetic energy was computed as 0.149 J with an inductance of 0.0477 H. To satisfy the evaluation criteria and accurately capture the system dynamics, data was collected for at least ten operational positions from this transient study. Table 1 details these extracted torque values.</p>
 
     <table>
         <caption>Table 1: Axial torque values at discrete rotor positions for the linear material model.</caption>
@@ -160,33 +167,33 @@
         </tbody>
     </table>
 
-    <p>To validate the models, the computational results obtained from the COMSOL simulations were plotted against the theoretical analytical derivations. The idealized analytical model assumes a perfect sinusoidal variation and predicts a higher peak torque. The FEM results accurately capture the flux leakage and fringing fields, resulting in a simulated peak torque of 86.64 mN&middot;m at the 135-degree position.</p>
+    <p>The time-dependent FEM results accurately capture the flux leakage and fringing fields during continuous rotation, resulting in a simulated peak torque of 86.64 mN&middot;m at the 135-degree position. This smooth dynamic profile is presented in Figure 5.</p>
 
     <figure>
         <img src="Analytical vs FEM Comparison timedependent.png" alt="Comparison of analytical and FEM results">
-        <figcaption>Figure 4: Comparison of analytical and FEM results (time-dependent) for the linear model.</figcaption>
+        <figcaption>Figure 5: Comparison of analytical and time-dependent FEM results for the linear model.</figcaption>
     </figure>
 
 
     <h1>4. FEA Modelling: 2D Non-linear Materials (Q3)</h1>
     <h2>4.1 Flux Density Vectors (Q3-a)</h2>
-    <p>To observe the effects of material saturation, the core material properties were updated to incorporate the actual B-H curve of Soft Iron, rendering the material non-linear. The flux density vectors were replotted for 0, 45, and 90 degrees, as shown in Figure 5, Figure 6, and Figure 7, respectively.</p>
+    <p>To observe the effects of material saturation, the core material properties were updated to incorporate the actual B-H curve of Soft Iron, rendering the material non-linear. The flux density vectors were replotted for 0, 45, and 90 degrees, as shown in Figure 6, Figure 7, and Figure 8, respectively.</p>
 
     <figure>
         <img src="nonlinear 0 deg.png" alt="Flux density vectors at 0 degrees for non-linear soft iron">
-        <figcaption>Figure 5: Flux density vectors at 0 degrees for non-linear soft iron.</figcaption>
+        <figcaption>Figure 6: Flux density vectors at 0 degrees for non-linear soft iron.</figcaption>
     </figure>
     <figure>
         <img src="nonlinear 45 deg.png" alt="Flux density vectors at 45 degrees for non-linear soft iron">
-        <figcaption>Figure 6: Flux density vectors at 45 degrees for non-linear soft iron.</figcaption>
+        <figcaption>Figure 7: Flux density vectors at 45 degrees for non-linear soft iron.</figcaption>
     </figure>
     <figure>
         <img src="nonlinear 90 deg.png" alt="Flux density vectors at 90 degrees for non-linear soft iron">
-        <figcaption>Figure 7: Flux density vectors at 90 degrees for non-linear soft iron.</figcaption>
+        <figcaption>Figure 8: Flux density vectors at 90 degrees for non-linear soft iron.</figcaption>
     </figure>
 
     <h2>4.2 Inductance and Stored Energy (Q3-b)</h2>
-    <p>Unlike the linear analysis, a time-dependent dynamic study was performed on the non-linear model to accurately capture the system's response. At the fully aligned position (0 degrees), the stored energy was calculated as 0.135 J with an inductance of 0.0433 H. Compared to the linear model (0.0477 H), this inductance value is measurably lower due to magnetic saturation heavily reducing the permeability of the core material near the pole tips.</p>
+    <p>Unlike the initial linear analysis, a time-dependent dynamic study was performed exclusively on the non-linear model to accurately capture the system's continuous response. At the fully aligned position (0 degrees), the stored energy was calculated as 0.135 J with an inductance of 0.0433 H. Compared to the linear model (0.0477 H), this inductance value is measurably lower due to magnetic saturation heavily reducing the permeability of the core material near the pole tips.</p>
 
     <h2>4.3 Torque Comparison with Analytical Model (Q3-c)</h2>
     <p>The continuous torque profile obtained from the non-linear time-dependent simulation was documented to compare directly with the linear conditions. The generated torque values at ten discrete positions are summarized in Table 2.</p>
@@ -213,11 +220,11 @@
         </tbody>
     </table>
 
-    <p>These FEM results were plotted against the initial analytical derivation, as illustrated in Figure 8.</p>
+    <p>These FEM results were plotted against the initial analytical derivation, as illustrated in Figure 9.</p>
 
     <figure>
         <img src="Analytical vs FEM Comparison nonlinear.png" alt="Comparison of analytical and non-linear FEM torque results">
-        <figcaption>Figure 8: Comparison of analytical and non-linear FEM torque results.</figcaption>
+        <figcaption>Figure 9: Comparison of analytical and non-linear FEM torque results.</figcaption>
     </figure>
 
     <p>The graph clearly displays the profound dampening effect of the physical realities on the machine's performance. While the purely analytical equation forecasts a peak torque of 106 mN&middot;m, the introduction of non-linear material properties in the dynamic FEM model restricts the actual peak torque to 78.18 mN&middot;m. The shape of the FEM torque curve also noticeably deviates from the perfect analytical sine wave, exhibiting wider bases and flattened peaks due to position-dependent saturation characteristics.</p>
@@ -234,12 +241,12 @@
 
     <figure>
         <img src="rotation animation.gif" alt="Linear Rotation Animation">
-        <figcaption>Figure 9: Dynamic operation and flux density variation (Linear Model).</figcaption>
+        <figcaption>Figure 10: Dynamic operation and flux density variation (Linear Model).</figcaption>
     </figure>
 
     <figure>
         <img src="rotation animation nonlinear.gif" alt="Non-Linear Rotation Animation">
-        <figcaption>Figure 10: Dynamic operation and flux density variation (Non-linear Model).</figcaption>
+        <figcaption>Figure 11: Dynamic operation and flux density variation (Non-linear Model).</figcaption>
     </figure>
 
     <h1>7. Conclusion</h1>
@@ -248,11 +255,11 @@
     <hr style="margin: 40px 0;">
 
     <h1>Appendix A: Material Properties</h1>
-    <p>The magnetic core was modeled using "Soft Iron" for both the stator and the rotor. For the linear analysis, a constant relative permeability (\(\mu_r\)) of 2500 was assumed. For the non-linear FEA analysis, the intrinsic B-H magnetization curve for Soft Iron was utilized within the COMSOL material library. Figure 11 illustrates this non-linear relationship.</p>
+    <p>The magnetic core was modeled using "Soft Iron" for both the stator and the rotor. For the linear analysis, a constant relative permeability (\(\mu_r\)) of 2500 was assumed. For the non-linear FEA analysis, the intrinsic B-H magnetization curve for Soft Iron was utilized within the COMSOL material library. Figure 12 illustrates this non-linear relationship.</p>
 
     <figure>
         <img src="bh curve of soft iron.png" alt="B-H magnetization curve">
-        <figcaption>Figure 11: B-H magnetization curve for the Soft Iron core material.</figcaption>
+        <figcaption>Figure 12: B-H magnetization curve for the Soft Iron core material.</figcaption>
     </figure>
 
     <p>This curve accounts for the core saturation effect at high magnetic flux densities. To define this material behavior in the simulation, discrete data points mapping the magnetic field intensity (\(H\)) to the magnetic flux density (\(B\)) were incorporated, specific values of which can be observed at critical saturation thresholds (e.g., reaching 1.5 T at 5425 A/m and 2.0 T at 61213 A/m). The exact data points utilized for the B-H curve are detailed in Table 3.</p>
